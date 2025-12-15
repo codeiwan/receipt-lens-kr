@@ -1,0 +1,14 @@
+# Virtual Environment Folder
+.venv/
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Clutter that occurs when you use a Mac
+.DS_Store
+
+# (Important) Receipts containing test images or personal information
+*.jpg
+*.png
