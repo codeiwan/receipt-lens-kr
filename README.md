@@ -13,6 +13,7 @@ PaddleOCR 기반의 로컬 구동 한국어 영수증 OCR 프로젝트입니다.
 - **OS:** Windows / Mac / Linux
 - **Python:** `3.10` (권장)
 - **Library:** PaddleOCR v2.9+, OpenCV-Python
+- **Hardware:** NVIDIA GPU 권장 (학습 시 필수)
 
 ## 🚀 설치 및 시작하기 (Installation)
 
@@ -44,13 +45,31 @@ pip-sync requirements.txt
 ---
 
 ## 💻 실행 방법 (Usage)
-테스트할 영수증 이미지를 `receipt_test.jpg`로 저장한 후 아래 명령어를 실행합니다.
 
+### 1. OCR 인식 실행 (Inference)
+테스트할 영수증 이미지를 `receipt_test.jpg`로 저장한 후 아래 명령어를 실행합니다.
 ```bash
 python main.py
 ```
 
-### ⚙️ 동작 과정
+### 2. 데이터 라벨링 도구 실행 (Development)
+학습 데이터를 생성하기 위한 라벨링 툴(PPOCRLabel)은 별도의 스크립트로 실행합니다.
+(Windows 환경에서의 라이브러리 충돌 문제를 해결한 스크립트입니다.)
+
+**사전 준비:**
+```bash
+# 라벨링 툴 의존성 설치 (최초 1회)
+pip install PPOCRLabel "paddlex[ocr]"
+```
+
+**실행:**
+```bash
+python run_label.py
+```
+
+---
+
+## ⚙️ 동작 과정
 1. **전처리 (Preprocessing):** 원본 이미지를 흑백으로 변환하고 노이즈를 제거한 뒤 `processed_result.jpg`로 저장합니다.
 2. **인식 (OCR):** 전처리된 이미지를 PaddleOCR 엔진(PP-OCRv5)에 입력하여 텍스트를 추출합니다.
 3. **결과 출력:** 인식된 텍스트와 정확도(Confidence)를 터미널에 출력합니다.
@@ -62,7 +81,7 @@ python main.py
 
 1. **`requirements.in` 작성**
    ```text
-   paddlepaddle
+   paddlepaddle-gpu  # GPU 사용 시 (CPU만 쓴다면 paddlepaddle)
    paddleocr
    opencv-python
    ```
@@ -80,10 +99,10 @@ python main.py
 ---
 
 ## 🗑️ 제거 및 정리 (Uninstall & Cleanup)
-프로젝트 삭제 시 다음 두 폴더를 제거해야 합니다.
-1. 프로젝트 폴더 내 `.venv` (가상환경)
-2. 사용자 홈 디렉터리 내 `.paddlex` (모델 캐시 파일)
-   - Windows: `C:\Users\{사용자명}\.paddlex`
+프로젝트 삭제 시 다음 폴더들을 제거해야 합니다.
+1. `.venv` (가상환경)
+2. `C:\Users\{사용자명}\.paddlex` (OCR 모델 캐시)
+3. `C:\Users\{사용자명}\.paddleocr` (라벨링 툴 모델 캐시)
 
 ---
 
