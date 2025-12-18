@@ -1,0 +1,4 @@
+# OCR 실행용 (최신 호환)
+paddlepaddle-gpu
+paddleocr
+opencv-python

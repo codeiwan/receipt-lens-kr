@@ -1,14 +1,21 @@
-# Virtual Environment Folder
+# Python
+__pycache__/
+*.py[cod]
 .venv/
 venv/
 
-# Python cache files
-__pycache__/
-*.pyc
+# PaddleOCR
+PaddleOCR/
+inference/
 
-# Clutter that occurs when you use a Mac
-.DS_Store
+# Data & Models (용량이 크므로 제외, 필요시 샘플만 포함)
+data/
+models/pretrained/
+# models/finetuned/  <-- 배포할 모델만 남기고 제외할지 선택
 
-# (Important) Receipts containing test images or personal information
-*.jpg
-*.png
+# Logs & Configs
+output/
+log/
+.idea/
+.vscode/
+*.log
